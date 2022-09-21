@@ -73,9 +73,14 @@ h6 {
   box-shadow: 0 2px 2px firebrick;
   transition: all 0.3s ease-out;
   background-color: map-get($colors, primary);
+  display: flex;
   &:hover {
     background-color: map-get($colors, highlight);
     transition: none;
+  }
+  h3 {
+    align-self: end;
+    color: map-get($colors, dark);
   }
 }
 
