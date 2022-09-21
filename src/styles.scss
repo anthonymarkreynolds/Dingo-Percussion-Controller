@@ -21,6 +21,7 @@ h4,
 h5,
 h6 {
   font-family: "Bebas Neue";
+  margin: 4px;
 }
 
 .layout {
@@ -81,6 +82,61 @@ h6 {
 .pad-controls {
   background-color: skyblue;
   min-width: 400px;
+
+  .sm {
+    max-width: 50px;
+  }
+  .md {
+    max-width: 75px;
+  }
+  .lg {
+    max-width: 100px;
+  }
+}
+.dial-group {
+  display: flex;
+  align-items: end;
+}
+
+.dial-container {
+  display: flex;
+  flex-direction: column;
+  h6 {
+    font-size: 1em;
+  }
+  svg {
+    transform-origin: center;
+    transform: rotateZ(90deg);
+  }
+  svg.pan {
+    transform: rotateZ(270deg);
+  }
+}
+
+.dial {
+  fill: map-get($colors, primary);
+  stroke: lighten(map-get($colors, gray), 25%);
+  stroke-width: 0.5rem;
+  transition: all 0.3s ease-out;
+  &:hover {
+    fill: map-get($colors, highlight);
+    transition: none;
+  }
+}
+
+.dial-ring {
+  fill: none;
+  stroke: map-get($colors, white);
+  stroke-width: 0.5rem;
+}
+
+.blur {
+  filter: blur(4px);
+  stroke: map-get($colors, secondary);
+}
+
+.dial-label {
+  text-align: center;
 }
 
 .sequencer {
