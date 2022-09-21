@@ -23,7 +23,7 @@ const Pads = () => {
         <h3>Ride Cym</h3>
       </div>
       <div key={0} className="pad">
-        <h3>Cym Crash</h3>
+        <h3>Crash Cym</h3>
       </div>
 
       <div key={3} className="pad">
