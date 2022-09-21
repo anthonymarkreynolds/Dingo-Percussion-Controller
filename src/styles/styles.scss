@@ -1,4 +1,5 @@
 @import "variables";
+@import "typography";
 @import "toggle-switch";
 body {
   background-color: map-get($colors, white);
@@ -129,4 +130,3 @@ body {
   background-color: gray;
   height: 200px;
 }
-
