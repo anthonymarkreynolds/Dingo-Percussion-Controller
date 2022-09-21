@@ -30,7 +30,7 @@ const Pads = () => {
           );
         }}
       >
-        <h3>Ride Hat</h3>
+        <h3>Ride Cym</h3>
       </div>
       <div key={0} className="pad">
         <h3>Cym Crash</h3>
