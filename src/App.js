@@ -1,3 +1,6 @@
+import ToggleSwitch from './components/ToggleSwitch'
+
+
 const Explorer = () => {
   return (
     <div className="explorer">
@@ -7,6 +10,7 @@ const Explorer = () => {
 };
 
 const Pads = () => {
+
   return (
     <div className="pads">
       {Array.from({ length: 9 }, (_, i) => (
@@ -20,6 +24,7 @@ const PadControls = () => {
   return (
     <div className="pad-controls">
       <h3>Pad Controls</h3>
+      <ToggleSwitch name="Reverb"/>
     </div>
   );
 };
