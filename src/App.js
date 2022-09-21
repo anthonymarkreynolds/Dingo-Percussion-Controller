@@ -1,4 +1,4 @@
-// import ToggleSwitch from './components/ToggleSwitch'
+
 
 
 const Explorer = () => {
@@ -24,7 +24,6 @@ const PadControls = () => {
   return (
     <div className="pad-controls">
       <h3>Pad Controls</h3>
-      {/* <ToggleSwitch/> */}
     </div>
   );
 };
