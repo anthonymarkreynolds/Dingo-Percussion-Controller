@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function ToggleSwitch(props) {
-    const {name} = props;
+export default function ToggleSwitch() {
+    
 
     return (
         <div className="toggle-switch">
