@@ -21,6 +21,7 @@ h4,
 h5,
 h6 {
   font-family: "Bebas Neue";
+  margin: 4px;
 }
 
 .layout {
@@ -81,6 +82,23 @@ h6 {
 .pad-controls {
   background-color: skyblue;
   min-width: 400px;
+}
+
+.dial-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dial {
+  fill: map-get($colors, primary);
+  stroke: map-get($colors, tertiary);
+  stroke-width: 0.5rem;
+  transform-origin: center;
+  transform: rotateZ(90deg);
+}
+
+.dial-label {
+  text-align: center;
 }
 
 .sequencer {
