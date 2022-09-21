@@ -8,7 +8,6 @@ export default function ToggleSwitch() {
       <label className="switch">
         <input
           type="checkbox"
-          defaultChecked={toggle}
           checked={toggle}
           onChange={() => setToggle(!toggle)}
         />

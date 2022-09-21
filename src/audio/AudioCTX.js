@@ -9,14 +9,14 @@ osc1.frequency.value = 200;
 const gain1 = actx.createGain();
 gain1.gain.value = 0.25;
 
-const comp1 = actx.createDynamicsCompressor();
-comp1.attack.value = 0.01;
-comp1.release.value = 0.25;
-comp1.ratio.value = 10;
-comp1.threshold.value = -40;
-comp1.knee.value = 40;
+// const comp1 = actx.createDynamicsCompressor();
+// comp1.attack.value = 0.01;
+// comp1.release.value = 0.25;
+// comp1.ratio.value = 10;
+// comp1.threshold.value = -40;
+// comp1.knee.value = 40;
 
-osc1.connect(gain1).connect(comp1).connect(out);
+osc1.connect(gain1).connect(out);
 
 const initialValue = {
   actx,
