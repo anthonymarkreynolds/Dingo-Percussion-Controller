@@ -1,14 +1,19 @@
-import React from 'react'
+import { useState } from "react";
 
 export default function ToggleSwitch() {
-    
+  const [toggle, setToggle] = useState(false);
 
-    return (
-        <div className="toggle-switch">
-            <label className="switch">
-                <input type="checkbox"/>
-                <span className="slider round"></span>
-            </label>
-        </div>
-    )
+  return (
+    <div className="toggle-switch">
+      <label className="switch">
+        <input
+          type="checkbox"
+          defaultChecked={toggle}
+          checked={toggle}
+          onChange={() => setToggle(!toggle)}
+        />
+        <span className="slider round"></span>
+      </label>
+    </div>
+  );
 }

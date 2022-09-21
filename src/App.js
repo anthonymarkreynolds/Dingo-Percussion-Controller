@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
 import AudioCTX from "./audio/AudioCTX.js";
+import ToggleSwitch from "./components/ToggleSwitch";
 
 const Explorer = () => {
   return (
     <div className="explorer">
       <h3>Sample Explorer</h3>
+      <ToggleSwitch />
     </div>
   );
 };
