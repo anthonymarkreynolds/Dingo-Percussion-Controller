@@ -2,33 +2,21 @@ import { useContext } from "react";
 import AudioCTX from "../audio/AudioCTX.js";
 
 const Pads = () => {
-  const { actx, osc1, gain1 } = useContext(AudioCTX);
+  const { pads } = useContext(AudioCTX);
   return (
     <div className="pads">
-      <div key={2} className="pad">
-        <h3>Hi Tom</h3>
-      </div>
-      <div
-        className="pad"
-        key={1}
-        onClick={() => {
-          gain1.gain.cancelScheduledValues(actx.currentTime);
-          gain1.gain.setValueAtTime(0.25, actx.currentTime);
-          gain1.gain.exponentialRampToValueAtTime(
-            0.000000000001,
-            actx.currentTime + 2
-          );
-        }}
-      >
+      {Object.entries(pads).map(([name, nodes], i) => (
+        <div className="pad" key={i + 100} onClick={() => nodes.trigger()}>
+          <h3>{name}</h3>
+        </div>
+      ))}
+      <div className="pad" key={1}>
         <h3>Ride Cym</h3>
       </div>
       <div key={0} className="pad">
         <h3>Crash Cym</h3>
       </div>
 
-      <div key={3} className="pad">
-        <h3>Lo Tom</h3>
-      </div>
       <div key={4} className="pad">
         <h3>Open HiHat</h3>
       </div>

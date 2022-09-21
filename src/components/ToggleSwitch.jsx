@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ToggleSwitch() {
+const ToggleSwitch = ({ callback }) => {
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -9,10 +9,15 @@ export default function ToggleSwitch() {
         <input
           type="checkbox"
           checked={toggle}
-          onChange={() => setToggle(!toggle)}
+          onChange={() => {
+            setToggle(!toggle);
+            callback && callback(toggle);
+          }}
         />
         <span className="slider round"></span>
       </label>
     </div>
   );
-}
+};
+
+export default ToggleSwitch;
