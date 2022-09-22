@@ -24,8 +24,8 @@ const pads = {
   },
   "Lo Tom": {
     osc: new OscillatorNode(actx, {
-      type: "triangle",
-      frequency: 138.59,
+      type: "square",
+      frequency: 40,
     }),
     vol: new GainNode(actx, { gain: 0 }),
     trigger: function () {
