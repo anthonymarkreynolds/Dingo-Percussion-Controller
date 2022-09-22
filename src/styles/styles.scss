@@ -60,7 +60,7 @@ body {
     transition: none;
   }
   h3 {
-    align-self: end;
+    align-self: flex-end;
     color: map-get($colors, dark);
   }
 }
@@ -81,7 +81,7 @@ body {
 }
 .dial-group {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .dial-container {
