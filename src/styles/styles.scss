@@ -1,8 +1,15 @@
 @import "variables";
 @import "typography";
 @import "toggle-switch";
+@import "theme-style-switch";
+
 body {
   background-color: map-get($colors, white);
+}
+
+#night {
+  background-color: black;
+  color: map-get($colors, primary);
 }
 
 .layout {
