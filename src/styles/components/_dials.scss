@@ -1,0 +1,46 @@
+.dial-group {
+  display: flex;
+  align-items: flex-end;
+}
+
+.dial-container {
+  display: flex;
+  flex-direction: column;
+  h6 {
+    font-size: 1em;
+  }
+  svg {
+    transform-origin: center;
+    transform: rotateZ(90deg);
+  }
+  svg.pan {
+    transform: rotateZ(270deg);
+  }
+}
+
+.dial {
+  fill: map-get($colors, primary);
+  stroke: lighten(map-get($colors, gray), 25%);
+  stroke-width: 0.5rem;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  &:hover {
+    fill: map-get($colors, highlight);
+    transition: none;
+  }
+}
+
+.dial-ring {
+  fill: none;
+  stroke: map-get($colors, white);
+  stroke-width: 0.5rem;
+}
+
+.blur {
+  filter: blur(4px);
+  stroke: map-get($colors, secondary);
+}
+
+.dial-label {
+  text-align: center;
+}

@@ -1,4 +1,9 @@
+import { useState, useContext } from "react";
+import CursorCTX from "../../util/CursorCTX";
+
 const Dial = ({ label, initValue, pan, sm, md, lg }) => {
+  const [cursor, setCursor] = useContext(CursorCTX);
+  const [dialValue, setDialValue] = useState(initValue);
   return (
     <div className="dial-container">
       <svg
@@ -7,7 +12,14 @@ const Dial = ({ label, initValue, pan, sm, md, lg }) => {
           (sm && "sm") || (md && "md") || (lg && "lg")
         }`}
       >
-        <circle className="dial" cx="50" cy="50" r="40" />
+        <circle
+          className="dial"
+          cx="50"
+          cy="50"
+          r="40"
+          //TODO: create call back to update dial value
+          // onMouseDownCapture={() => setCursor(prev => return  ({...prev, mouseDown: true}))}
+        />
         <circle
           pathLength={1}
           strokeDasharray={1}
@@ -27,7 +39,7 @@ const Dial = ({ label, initValue, pan, sm, md, lg }) => {
           r="40"
         />
       </svg>
-      {label && <h6 className="dial-label">{label}</h6>}
+      {label && <h6 className="dial-label noselect">{label}</h6>}
     </div>
   );
 };

@@ -9,7 +9,7 @@ const Pads = () => {
     <div className={`pads ${nightMode && "night"}`}>
       {Object.entries(pads).map(([name, nodes], i) => (
         <div className="pad" key={i + 100} onClick={() => nodes.trigger()}>
-          <h3>{name}</h3>
+          <h3 className="noselect">{name}</h3>
         </div>
       ))}
       <div className="pad" key={1}>
