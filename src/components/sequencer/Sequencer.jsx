@@ -5,7 +5,7 @@ const Sequencer = () => {
   const [nightMode] = useContext(NightMode);
   return (
     <div className={`sequencer ${nightMode && "night"}`}>
-      <h3>Step Sequencer</h3>
+      <h3 className="area-label">Step Sequencer</h3>
     </div>
   );
 };

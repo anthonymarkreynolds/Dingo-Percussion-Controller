@@ -102,7 +102,7 @@ html {
   }
   
   input:checked + .switch-left {
-    background-color: #0084d0;
+    background-color: map-get($colors, tertiary);
     color: #fff;
     bottom: 0px;
     left: 0.5em;

@@ -7,3 +7,10 @@ h6 {
   font-family: "Bebas Neue";
   margin: 4px;
 }
+
+.area-label {
+  margin: 0;
+  margin-bottom: 4px;
+  padding: 6px 6px 2px 6px;
+  background: rgba(map-get($colors, primary), 0.25);
+}

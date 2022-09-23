@@ -6,7 +6,7 @@ const PadControls = () => {
   const [nightMode] = useContext(NightMode);
   return (
     <div className={`pad-controls ${nightMode && "night"}`}>
-      <h3>Pad Controls</h3>
+      <h3 className="area-label">Pad Controls</h3>
       <PadMain />
       <ADSR />
     </div>

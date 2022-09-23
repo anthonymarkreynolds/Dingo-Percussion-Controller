@@ -40,6 +40,7 @@ body {
   padding: 10px;
   border-radius: inherit;
   & > div {
+    overflow: hidden;
     border-radius: 8px;
     border: 1px solid lighten(map-get($colors, highlight), 35%);
     background-color: white;
