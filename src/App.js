@@ -1,16 +1,15 @@
-import DrumMachine from "./layouts/DrumMachine";
+import { useState, useEffect } from "react";
+import NightMode from "./util/NightMode";
+import MainLayout from "./layouts/MainLayout";
 import KeyPress from "./util/KeyPress";
 
 function App() {
+  const toggle = useState(false);
   return (
-    <>
+    <NightMode.Provider value={toggle}>
       <KeyPress />
-      <div className="layout">
-        <h1>DPC</h1>
-        <h2>Dingo Percussion Controller</h2>
-        <DrumMachine />
-      </div>
-    </>
+      <MainLayout />
+    </NightMode.Provider>
   );
 }
 

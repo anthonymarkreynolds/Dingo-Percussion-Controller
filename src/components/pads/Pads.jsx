@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import AudioCTX from "../../audio/AudioCTX.js";
+import NightMode from "../../util/NightMode";
 
 const Pads = () => {
+  const [nightMode] = useContext(NightMode);
   const { pads } = useContext(AudioCTX);
   return (
-    <div className="pads">
+    <div className={`pads ${nightMode && "night"}`}>
       {Object.entries(pads).map(([name, nodes], i) => (
         <div className="pad" key={i + 100} onClick={() => nodes.trigger()}>
           <h3>{name}</h3>
