@@ -3,6 +3,24 @@ import { createContext } from "react";
 const actx = new AudioContext();
 const out = actx.destination;
 
+const envTest = (parameter, evelope) => {
+  parameter.cancelScheduledValues();
+
+  const ADSR = evelope || {
+    attack: 0.24,
+    decay: 0.25,
+    sustain: 0.5,
+    release: 0.5,
+  };
+  const STAGE_MAX_TIME = 2;
+  const multiplier = 1;
+
+  const now = actx.currentTime;
+  const attackDuration = ADSR.attack * STAGE_MAX_TIME;
+  const attackEnd = now + attackDuration;
+  const decayDuration = ADSR.decay * STAGE_MAX_TIME;
+};
+
 const pads = {
   "Hi Tom": {
     osc: new OscillatorNode(actx, {

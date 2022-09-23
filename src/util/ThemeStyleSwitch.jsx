@@ -12,14 +12,14 @@ export default function ThemeStyleSwitch() {
 
     if (themeSwitch === true) {
         addId("body")
-        addId(".explorer")
+        addId(".main-controls")
         addId(".pad-controls")
         addId(".sequencer")
         addId(".pads")
         
     }else if (themeSwitch === false){
         removeId("body")
-        removeId(".explorer")
+        removeId(".main-controls")
         removeId(".pad-controls")
         removeId(".sequencer")
         removeId(".pads")

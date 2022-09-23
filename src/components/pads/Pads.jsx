@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import AudioCTX from "../audio/AudioCTX.js";
+import AudioCTX from "../../audio/AudioCTX.js";
 
 const Pads = () => {
   const { pads } = useContext(AudioCTX);
