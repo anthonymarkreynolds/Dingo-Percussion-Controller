@@ -26,7 +26,6 @@
 
 .pad-controls {
   min-width: 400px;
-
   .sm {
     max-width: 50px;
   }
@@ -36,4 +35,10 @@
   .lg {
     max-width: 100px;
   }
+}
+
+.pad-main {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(map-get($colors, gray), 0.3);
 }
