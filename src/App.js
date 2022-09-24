@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NightMode from "./util/NightMode";
 import MainLayout from "./layouts/MainLayout";
 import KeyPress from "./util/KeyPress";

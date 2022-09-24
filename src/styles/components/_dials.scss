@@ -22,7 +22,6 @@
   fill: map-get($colors, primary);
   stroke: lighten(map-get($colors, gray), 25%);
   stroke-width: 0.5rem;
-  transition: all 0.3s ease-out;
   cursor: pointer;
   &:hover {
     fill: map-get($colors, highlight);
@@ -43,4 +42,10 @@
 
 .dial-label {
   text-align: center;
+  margin-top: 0;
+}
+.dial-value {
+  margin-top: 3px;
+  text-align: center;
+  font-size: 12px;
 }

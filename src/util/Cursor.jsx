@@ -2,19 +2,26 @@ import { useEffect, useContext } from "react";
 import CursorCTX from "./CursorCTX";
 
 const Cursor = () => {
-  const [cursor, updateCursor] = useContext(CursorCTX);
+  const [cursor, setCursor] = useContext(CursorCTX);
+
+  const handleMouseMove = (e) => {
+    setCursor((prev) => {
+      if (prev.callback) {
+        prev.callback(prev.y, e.screenY);
+      }
+      return { ...prev, x: e.screenX, y: e.screenY };
+    });
+  };
+
   useEffect(() => {
-    document.addEventListener(
-      "mouseup",
-      updateCursor({ ...cursor, mouseDown: false })
-    );
-    document.addEventListener(
-      "mousedown",
-      updateCursor({ ...cursor, mouseDown: true })
-    );
-    document.addEventListener("mouseover", (e) =>
-      updateCursor({ ...cursor, x: e.screenX, y: e.screenY })
-    );
+    document.addEventListener("mouseup", () => {
+      setCursor((prev) => ({
+        ...prev,
+        mouseDown: false,
+        callback: undefined,
+      }));
+    });
+    document.addEventListener("mousemove", handleMouseMove);
   }, []);
 };
 

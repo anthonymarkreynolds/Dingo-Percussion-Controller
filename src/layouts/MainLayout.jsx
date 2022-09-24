@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import NightMode from "../util/NightMode";
 import DrumMachine from "./DrumMachine";
+
 const MainLayout = () => {
   const [nightmode] = useContext(NightMode);
   return (
