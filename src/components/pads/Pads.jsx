@@ -1,14 +1,23 @@
 import { useContext } from "react";
 import AudioCTX from "../../audio/AudioCTX.js";
 import NightMode from "../../util/NightMode";
+import SelectCTX from "../../util/SelectCTX";
 
 const Pads = () => {
   const [nightMode] = useContext(NightMode);
+  const [, setSelected] = useContext(SelectCTX);
   const { pads } = useContext(AudioCTX);
   return (
     <div className={`pads ${nightMode && "night"}`}>
-      {Object.entries(pads).map(([name, nodes], i) => (
-        <div className="pad" key={i + 100} onClick={() => nodes.trigger()}>
+      {Object.entries(pads).map(([name, pad], i) => (
+        <div
+          className="pad"
+          key={i + 100}
+          onClick={() => {
+            pad.trigger();
+            setSelected(pads[pad]);
+          }}
+        >
           <h3 className="noselect">{name}</h3>
         </div>
       ))}

@@ -27,7 +27,7 @@ const PadMain = () => {
           sm
           pan
           label="Pitch"
-          step
+          step="semi"
           parameterCallback={actx.pads["Hi Tom"].setPitch}
         />
         <Dial sm initValue={0.5} md label="Duration" />

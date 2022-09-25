@@ -6,11 +6,18 @@ h5,
 h6 {
   font-family: map-get($fonts, heading);
   margin: 4px;
+  user-select: none;
 }
 
-p,
+p {
+  font-family: map-get($fonts, regular);
+}
 span {
   font-family: map-get($fonts, mono);
+}
+button {
+  font-family: map-get($fonts, regular);
+  font-size: 75%;
 }
 
 .noselect {

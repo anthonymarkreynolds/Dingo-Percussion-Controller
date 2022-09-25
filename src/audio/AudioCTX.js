@@ -65,37 +65,22 @@ class Pad {
 }
 
 const pads = {
-  "Hi Tom": new Pad(),
+  "Hi Tom": new Pad("sine", 440),
+  "Lo Tom": new Pad("triangle", 220),
   // {
-  //   osc: new OscillatorNode(actx, {
-  //     type: "sine",
-  //     frequency: main.pitch,
-  //   }),
-  //   vol: new GainNode(actx, { gain: 0 }),
-  //   trigger: function () {
-  //     this.vol.gain
-  //       .cancelScheduledValues(actx.currentTime)
-  //       .setValueAtTime(0.25, actx.currentTime)
-  //       .linearRampToValueAtTime(0, actx.currentTime + 0.5);
-  //   },
-  //   setPitch: function (value) {
-  //     console.log(value);
-  //     console.log(semitoneToPitch(value));
-  //   },
+
+  // osc: new OscillatorNode(actx, {
+  //   type: "square",
+  //   frequency: 40,
+  // }),
+  // vol: new GainNode(actx, { gain: 0 }),
+  // trigger: function () {
+  //   this.vol.gain
+  //     .cancelScheduledValues(actx.currentTime)
+  //     .setValueAtTime(0.3, actx.currentTime)
+  //     .linearRampToValueAtTime(0, actx.currentTime + 0.3);
   // },
-  "Lo Tom": {
-    osc: new OscillatorNode(actx, {
-      type: "square",
-      frequency: 40,
-    }),
-    vol: new GainNode(actx, { gain: 0 }),
-    trigger: function () {
-      this.vol.gain
-        .cancelScheduledValues(actx.currentTime)
-        .setValueAtTime(0.3, actx.currentTime)
-        .linearRampToValueAtTime(0, actx.currentTime + 0.3);
-    },
-  },
+  // },
 };
 
 // connect nodes to out

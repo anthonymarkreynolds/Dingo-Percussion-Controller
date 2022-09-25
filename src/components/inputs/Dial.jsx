@@ -17,7 +17,7 @@ const Dial = ({
   const [, setCursor] = useContext(CursorCTX);
 
   // toggle snapping behaviour
-  const [_step, setStep] = useState(step);
+  const [_step, setStep] = useState(!!step);
 
   //internal value used to dial position
   const [dialValue, setDialValue] = useState(initValue);
@@ -33,21 +33,28 @@ const Dial = ({
   //min max is used to prevent the dial from overturning
   const [min, max] = pan ? [-0.5, 0.5] : [0, 1];
 
-  const updateDial = (prevY, currY) => {
+  const updateDial = (prevY, currY, skip) => {
     console.log("updateDial has run");
-
-    setDialValue((prev) => {
-      // compare previous mouseY position
-      let next = prev + (prevY - currY) * 0.001;
-      if (next > max) {
-        next = max;
-      }
-      if (next < min) {
-        next = min;
-      }
-      setParameterValue(valueModifier(pan ? next * 2 : next, _step));
-      return next;
-    });
+    if (skip) {
+      //this is  weird
+      setParameterValue(valueModifier(pan ? dialValue * 2 : dialValue, !_step));
+    } else {
+      setDialValue((prev) => {
+        // compare previous mouseY position
+        let next = prev + (prevY - currY) * 0.001;
+        //clamp max
+        if (next > max) {
+          next = max;
+        }
+        // clamp min
+        if (next < min) {
+          next = min;
+        }
+        //set the param value
+        setParameterValue(valueModifier(pan ? next * 2 : next, _step));
+        return next;
+      });
+    }
   };
   return (
     <div className="dial-container">
@@ -98,8 +105,13 @@ const Dial = ({
       <span className="dial-value noselect">{parameterValue.toFixed(2)}</span>
       {label && <h6 className="dial-label noselect">{label}</h6>}
       {step && (
-        <button onClick={() => setStep(!_step)}>
-          {_step ? "step" : "free"}
+        <button
+          onClick={() => {
+            updateDial(0, 0, true);
+            setStep(!_step);
+          }}
+        >
+          {_step ? step : "free"}
         </button>
       )}
     </div>
