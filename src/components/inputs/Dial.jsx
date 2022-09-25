@@ -14,20 +14,22 @@ const Dial = ({
   lg,
   step,
 }) => {
-  const [, setCursor] = useContext(CursorCTX);
+  const [cursor, setCursor] = useContext(CursorCTX);
 
   // toggle snapping behaviour
   const [_step, setStep] = useState(!!step);
 
   //internal value used to dial position
-  const [dialValue, setDialValue] = useState(initValue);
+  const [dialValue, setDialValue] = useState(initValue || 0);
 
   //calculated value for use with paramaeter
-  const [parameterValue, setParameterValue] = useState(initValue);
+  const [parameterValue, setParameterValue] = useState(initValue || 0);
 
   // When the dial turns some valueModifier's may update the parameterValue in steps, useEffect I used to run the parameterCallback only if the dial has turned enough to update the parameterValue.
   useEffect(() => {
-    if (parameterCallback) parameterCallback(parameterValue);
+    if (parameterCallback) {
+      parameterCallback(parameterValue);
+    }
   }, [parameterValue]);
 
   //min max is used to prevent the dial from overturning

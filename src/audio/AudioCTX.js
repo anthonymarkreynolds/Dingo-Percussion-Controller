@@ -31,7 +31,8 @@ let main = {
 const semitoneToPitch = (n) => 440 * (2 ** (1 / 12)) ** n;
 
 class Pad {
-  constructor(waveForm = "sine", baseFreq = 440) {
+  constructor(name, waveForm = "sine", baseFreq = 440, pan = 0) {
+    this.name = name;
     this.baseVol = 0.25;
     this.osc = new OscillatorNode(actx, {
       type: waveForm,
@@ -40,7 +41,7 @@ class Pad {
     this.vol = new GainNode(actx, {
       gain: 0,
     });
-    this.pan = new StereoPannerNode(actx);
+    this.pan = new StereoPannerNode(actx, { pan: pan });
     this.osc.connect(this.vol).connect(this.pan).connect(out);
   }
   trigger = () => {
@@ -57,6 +58,9 @@ class Pad {
   setPan = (value) => {
     this.pan.pan.setValueAtTime(value, actx.currentTime);
   };
+  getPan() {
+    return this.pan.pan.value;
+  }
   setPitch = (value) => {
     console.log(value);
     console.log(semitoneToPitch(value));
@@ -65,8 +69,8 @@ class Pad {
 }
 
 const pads = {
-  "Hi Tom": new Pad("sine", 440),
-  "Lo Tom": new Pad("triangle", 220),
+  "Hi Tom": new Pad("Hi Tom", "sine", 440, 0.25),
+  "Lo Tom": new Pad("Lo Tom", "triangle", 220),
   // {
 
   // osc: new OscillatorNode(actx, {

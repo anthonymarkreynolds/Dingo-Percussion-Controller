@@ -9,4 +9,6 @@ class Envelope {
   }
 }
 
-const test = new Envelope(0.25, 0.25, 0.5, 0.25);
+class Pad {
+  constructor(actx, 
+}

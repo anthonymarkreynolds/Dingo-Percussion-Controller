@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import NightMode from "../../util/NightMode";
 import PadMain from "./PadMain";
 import ADSR from "./ADSR";

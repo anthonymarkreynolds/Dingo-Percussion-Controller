@@ -8,7 +8,7 @@ import Cursor from "./util/Cursor";
 
 function App() {
   const toggle = useState(false);
-  const select = useState();
+  const select = useState(null);
   const cursorState = useState({ x: 0, y: 0, mouseDown: false });
   return (
     <SelectCTX.Provider value={select}>
