@@ -3,7 +3,7 @@ import { createContext } from "react";
 const actx = new AudioContext();
 const out = actx.destination;
 
-const envTest = (parameter, evelope) => {
+const envTest = (parameter, evelope, noteLength = 1) => {
   parameter.cancelScheduledValues();
 
   const ADSR = evelope || {
@@ -11,6 +11,8 @@ const envTest = (parameter, evelope) => {
     decay: 0.25,
     sustain: 0.5,
     release: 0.5,
+    length: 1,
+    amount: 1,
   };
   const STAGE_MAX_TIME = 2;
   const multiplier = 1;
@@ -21,23 +23,29 @@ const envTest = (parameter, evelope) => {
   const decayDuration = ADSR.decay * STAGE_MAX_TIME;
 };
 
+let main = {
+  vol: 0.25,
+  pitch: 440,
+};
+
+const semitoneToPitch = (n) => 440 * (2 ** (1 / 12)) ** n;
+
 const pads = {
   "Hi Tom": {
     osc: new OscillatorNode(actx, {
       type: "sine",
-      frequency: 440,
+      frequency: main.pitch,
     }),
     vol: new GainNode(actx, { gain: 0 }),
     trigger: function () {
-      this.osc.frequency
-        .cancelScheduledValues(actx.currentTime)
-        .setValueAtTime(440, actx.currentTime)
-        .exponentialRampToValueAtTime(110, actx.currentTime + 1);
-
       this.vol.gain
         .cancelScheduledValues(actx.currentTime)
         .setValueAtTime(0.25, actx.currentTime)
         .linearRampToValueAtTime(0, actx.currentTime + 0.5);
+    },
+    setPitch: function (value) {
+      console.log(value);
+      console.log(semitoneToPitch(value));
     },
   },
   "Lo Tom": {

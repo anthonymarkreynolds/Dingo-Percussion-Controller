@@ -6,22 +6,29 @@
 .dial-container {
   display: flex;
   flex-direction: column;
-  h6 {
-    font-size: 1em;
-  }
   svg {
     transform-origin: center;
     transform: rotateZ(90deg);
+    margin: 0 auto;
   }
   svg.pan {
     transform: rotateZ(270deg);
+  }
+  .sm {
+    max-width: 40px;
+  }
+  .md {
+    max-width: 50px;
+  }
+  .lg {
+    max-width: 60px;
   }
 }
 
 .dial {
   fill: map-get($colors, primary);
-  stroke: lighten(map-get($colors, gray), 25%);
-  stroke-width: 0.5rem;
+  stroke: rgba(map-get($colors, gray), 0.75);
+  stroke-width: 0.25rem;
   cursor: pointer;
   &:hover {
     fill: map-get($colors, highlight);
@@ -43,9 +50,12 @@
 .dial-label {
   text-align: center;
   margin-top: 0;
+  font-size: 0.9em;
 }
+
 .dial-value {
   margin-top: 3px;
   text-align: center;
-  font-size: 12px;
+  font-size: 66%;
+  font-family: map-get($fonts, mono), monospace;
 }

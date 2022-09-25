@@ -1,22 +1,46 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CursorCTX from "../../util/CursorCTX";
 
-const Dial = ({ label, initValue, pan, sm, md, lg }) => {
+const Dial = ({
+  //default to nullary function
+  parameterCallback,
+  // default to identity function
+  valueModifier,
+  label,
+  initValue = 0,
+  pan,
+  sm,
+  md,
+  lg,
+}) => {
   const [, setCursor] = useContext(CursorCTX);
-  const [dialValue, setDialValue] = useState(initValue || 0);
+
+  //internal value used to dial position
+  const [dialValue, setDialValue] = useState(initValue);
+
+  //calculated value for use with paramaeter
+  const [parameterValue, setParameterValue] = useState(initValue);
+
+  // When the dial turns some valueModifier's may update the parameterValue in steps, useEffect I used to run the parameterCallback only if the dial has turned enough to update the parameterValue.
+  useEffect(() => {
+    if (parameterCallback) parameterCallback(parameterValue);
+  }, [parameterValue]);
+
   const [min, max] = pan ? [-0.5, 0.5] : [0, 1];
 
   const updateDial = (prevY, currY) => {
     console.log("updateDial has run");
+
     setDialValue((prev) => {
-      const next = prev + (prevY - currY) * 0.001;
+      let next = prev + (prevY - currY) * 0.001;
       if (next > max) {
-        return max;
-      } else if (next < min) {
-        return min;
-      } else {
-        return next;
+        next = max;
       }
+      if (next < min) {
+        next = min;
+      }
+      setParameterValue(valueModifier(pan ? next * 2 : next));
+      return next;
     });
   };
   return (
@@ -65,9 +89,7 @@ const Dial = ({ label, initValue, pan, sm, md, lg }) => {
           r="40"
         />
       </svg>
-      <span className="dial-value noselect">
-        {(pan ? dialValue * 2 : dialValue).toFixed(3)}
-      </span>
+      <span className="dial-value noselect">{parameterValue.toFixed(3)}</span>
       {label && <h6 className="dial-label noselect">{label}</h6>}
     </div>
   );
