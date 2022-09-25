@@ -8,13 +8,26 @@ const PadMain = () => {
     <div className="pad-main">
       <h2 style={{ alignSelf: "center" }}> {"<Pad name>"} </h2>
       <div className="dial-group">
-        <Dial sm label="Volume" />
-        <Dial sm pan label="Pan" />
         <Dial
-          valueModifier={(value) => Math.trunc(value * 12)}
+          sm
+          label="Volume"
+          initValue={0.25}
+          parameterCallback={actx.pads["Hi Tom"].setVol}
+        />
+        <Dial
+          sm
+          pan
+          label="Pan"
+          parameterCallback={actx.pads["Hi Tom"].setPan}
+        />
+        <Dial
+          valueModifier={(value, step) =>
+            step ? Math.trunc(value * 12) : value * 12
+          }
           sm
           pan
           label="Pitch"
+          step
           parameterCallback={actx.pads["Hi Tom"].setPitch}
         />
         <Dial sm initValue={0.5} md label="Duration" />

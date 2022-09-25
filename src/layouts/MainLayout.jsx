@@ -6,8 +6,8 @@ const MainLayout = () => {
   const [nightmode] = useContext(NightMode);
   return (
     <div className={`layout ${nightmode && "night"}`}>
-      <h1>DPC</h1>
-      <h2>Dingo Percussion Controller</h2>
+      <h1>D3M</h1>
+      <h2>Dingo Digital Drum Machine</h2>
       <DrumMachine />
     </div>
   );

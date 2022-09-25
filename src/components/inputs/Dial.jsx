@@ -5,15 +5,19 @@ const Dial = ({
   //default to nullary function
   parameterCallback,
   // default to identity function
-  valueModifier,
+  valueModifier = (x) => x,
   label,
   initValue = 0,
   pan,
   sm,
   md,
   lg,
+  step,
 }) => {
   const [, setCursor] = useContext(CursorCTX);
+
+  // toggle snapping behaviour
+  const [_step, setStep] = useState(step);
 
   //internal value used to dial position
   const [dialValue, setDialValue] = useState(initValue);
@@ -26,12 +30,14 @@ const Dial = ({
     if (parameterCallback) parameterCallback(parameterValue);
   }, [parameterValue]);
 
+  //min max is used to prevent the dial from overturning
   const [min, max] = pan ? [-0.5, 0.5] : [0, 1];
 
   const updateDial = (prevY, currY) => {
     console.log("updateDial has run");
 
     setDialValue((prev) => {
+      // compare previous mouseY position
       let next = prev + (prevY - currY) * 0.001;
       if (next > max) {
         next = max;
@@ -39,7 +45,7 @@ const Dial = ({
       if (next < min) {
         next = min;
       }
-      setParameterValue(valueModifier(pan ? next * 2 : next));
+      setParameterValue(valueModifier(pan ? next * 2 : next, _step));
       return next;
     });
   };
@@ -89,8 +95,13 @@ const Dial = ({
           r="40"
         />
       </svg>
-      <span className="dial-value noselect">{parameterValue.toFixed(3)}</span>
+      <span className="dial-value noselect">{parameterValue.toFixed(2)}</span>
       {label && <h6 className="dial-label noselect">{label}</h6>}
+      {step && (
+        <button onClick={() => setStep(!_step)}>
+          {_step ? "step" : "free"}
+        </button>
+      )}
     </div>
   );
 };

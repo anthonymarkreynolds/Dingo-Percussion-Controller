@@ -31,21 +31,31 @@ let main = {
 const semitoneToPitch = (n) => 440 * (2 ** (1 / 12)) ** n;
 
 class Pad {
-  constructor(waveForm = "sine", baseFreq) {
+  constructor(waveForm = "sine", baseFreq = 440) {
+    this.baseVol = 0.25;
     this.osc = new OscillatorNode(actx, {
       type: waveForm,
-      frequency: this.baseFreq,
+      frequency: baseFreq,
     });
     this.vol = new GainNode(actx, {
       gain: 0,
     });
-    this.osc.connect(this.vol).connect(out);
+    this.pan = new StereoPannerNode(actx);
+    this.osc.connect(this.vol).connect(this.pan).connect(out);
   }
   trigger = () => {
+    console.log(this.baseVol);
     this.vol.gain
       .cancelScheduledValues(actx.currentTime)
-      .setValueAtTime(0.25, actx.currentTime)
+      .setValueAtTime(this.baseVol, actx.currentTime)
       .linearRampToValueAtTime(0, actx.currentTime + 0.5);
+  };
+  setVol = (value) => {
+    this.baseVol = value;
+    console.log(this.baseVol);
+  };
+  setPan = (value) => {
+    this.pan.pan.setValueAtTime(value, actx.currentTime);
   };
   setPitch = (value) => {
     console.log(value);
