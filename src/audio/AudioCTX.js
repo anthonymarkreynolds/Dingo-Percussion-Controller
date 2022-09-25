@@ -30,24 +30,49 @@ let main = {
 
 const semitoneToPitch = (n) => 440 * (2 ** (1 / 12)) ** n;
 
+class Pad {
+  constructor(waveForm = "sine", baseFreq) {
+    this.osc = new OscillatorNode(actx, {
+      type: waveForm,
+      frequency: this.baseFreq,
+    });
+    this.vol = new GainNode(actx, {
+      gain: 0,
+    });
+    this.osc.connect(this.vol).connect(out);
+  }
+  trigger = () => {
+    this.vol.gain
+      .cancelScheduledValues(actx.currentTime)
+      .setValueAtTime(0.25, actx.currentTime)
+      .linearRampToValueAtTime(0, actx.currentTime + 0.5);
+  };
+  setPitch = (value) => {
+    console.log(value);
+    console.log(semitoneToPitch(value));
+    this.osc.frequency.setValueAtTime(semitoneToPitch(value), actx.currentTime);
+  };
+}
+
 const pads = {
-  "Hi Tom": {
-    osc: new OscillatorNode(actx, {
-      type: "sine",
-      frequency: main.pitch,
-    }),
-    vol: new GainNode(actx, { gain: 0 }),
-    trigger: function () {
-      this.vol.gain
-        .cancelScheduledValues(actx.currentTime)
-        .setValueAtTime(0.25, actx.currentTime)
-        .linearRampToValueAtTime(0, actx.currentTime + 0.5);
-    },
-    setPitch: function (value) {
-      console.log(value);
-      console.log(semitoneToPitch(value));
-    },
-  },
+  "Hi Tom": new Pad(),
+  // {
+  //   osc: new OscillatorNode(actx, {
+  //     type: "sine",
+  //     frequency: main.pitch,
+  //   }),
+  //   vol: new GainNode(actx, { gain: 0 }),
+  //   trigger: function () {
+  //     this.vol.gain
+  //       .cancelScheduledValues(actx.currentTime)
+  //       .setValueAtTime(0.25, actx.currentTime)
+  //       .linearRampToValueAtTime(0, actx.currentTime + 0.5);
+  //   },
+  //   setPitch: function (value) {
+  //     console.log(value);
+  //     console.log(semitoneToPitch(value));
+  //   },
+  // },
   "Lo Tom": {
     osc: new OscillatorNode(actx, {
       type: "square",
@@ -64,9 +89,9 @@ const pads = {
 };
 
 // connect nodes to out
-for (const pad in pads) {
-  pads[pad].osc.connect(pads[pad].vol).connect(out);
-}
+// for (const pad in pads) {
+//   pads[pad].osc.connect(pads[pad].vol).connect(out);
+// }
 
 // start VCOs
 const play = () => {
