@@ -31,7 +31,7 @@ let main = {
 const semitoneToPitch = (n) => 440 * (2 ** (1 / 12)) ** n;
 
 class Pad {
-  constructor(name, waveForm = "sine", baseFreq = 440, pan = 0) {
+  constructor(name, waveForm = "sine", baseFreq = main.pitch, pan = 0) {
     this.name = name;
     this.baseVol = 0.25;
     this.osc = new OscillatorNode(actx, {
@@ -69,8 +69,15 @@ class Pad {
 }
 
 const pads = {
-  "Hi Tom": new Pad("Hi Tom", "sine", 440, 0.25),
-  "Lo Tom": new Pad("Lo Tom", "triangle", 220),
+  "hi tom": new Pad("Hi Tom", "sine", semitoneToPitch(8)),
+  "crash cym": new Pad("Crash Cym", "sine", semitoneToPitch(7)),
+  "ride cym": new Pad("Ride Cym", "sine", semitoneToPitch(6)),
+  "lo tom": new Pad("Lo Tom", "sine", semitoneToPitch(5)),
+  "open hihat": new Pad("Open HiHat", "sine", semitoneToPitch(4)),
+  "closed hihat": new Pad("Closed HiHat", "sine", semitoneToPitch(3)),
+  "kick drum": new Pad("Kick Drum", "sine", semitoneToPitch(2)),
+  "snare drum": new Pad("Snare Drum", "sine", semitoneToPitch(1)),
+  clap: new Pad("Clap", "sine", semitoneToPitch(0)),
   // {
 
   // osc: new OscillatorNode(actx, {

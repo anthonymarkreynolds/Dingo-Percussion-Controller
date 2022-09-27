@@ -1,7 +1,6 @@
 import Dial from "../inputs/Dial";
 
 const PadMain = ({ selected }) => {
-  console.log("pan: ", selected?.getPan());
   const dials = [
     <Dial
       sm
@@ -32,10 +31,7 @@ const PadMain = ({ selected }) => {
   ];
   return (
     <div className="pad-main">
-      <h2 style={{ alignSelf: "center" }}>
-        {" "}
-        {`${selected?.pan.pan.value}` || "<Pad name>"}{" "}
-      </h2>
+      <h2 style={{ alignSelf: "center" }}>{selected?.name || "<Pad name>"} </h2>
       <div className="dial-group">{dials}</div>
     </div>
   );
