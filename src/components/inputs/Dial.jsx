@@ -2,16 +2,22 @@ import { useState, useContext, useEffect } from "react";
 import CursorCTX from "../../util/CursorCTX";
 
 const Dial = ({
-  //default to nullary function
   parameterCallback,
+
   // default to identity function
   valueModifier = (x) => x,
   label,
   initValue = 0,
+
+  // Panoramic dial
   pan,
+
+  // dial sizes
   sm,
   md,
   lg,
+
+  // value stepping / snapping
   step,
 }) => {
   const [cursor, setCursor] = useContext(CursorCTX);
@@ -19,17 +25,21 @@ const Dial = ({
   // toggle snapping behaviour
   const [_step, setStep] = useState(!!step);
 
-  //internal value used to dial position
+  // Internal value used to dial position
+  // This value is used to calculate the dashstroke-offset of the dial ring
   const [dialValue, setDialValue] = useState(initValue || 0);
 
-  //calculated value for use with paramaeter
+  // This value is calculated using the parameterCallback which accepts the dialValue as an argument and updates the associated audio node paramaeter.
+  // This value is also displayed under the dial.
   const [parameterValue, setParameterValue] = useState(initValue || 0);
 
   // When the dial turns some valueModifier's may update the parameterValue in steps, useEffect I used to run the parameterCallback only if the dial has turned enough to update the parameterValue.
   useEffect(() => {
+    // Runs only when a parameterCallback is passed
     if (parameterCallback) {
       parameterCallback(parameterValue);
     }
+    // when parameterValue changes, run parameterCallback to update associated audio node value.
   }, [parameterValue]);
 
   //min max is used to prevent the dial from overturning
@@ -37,10 +47,12 @@ const Dial = ({
 
   const updateDial = (prevY, currY, skip) => {
     console.log("updateDial has run");
+
+    // if update dial was trigged without turning the dial
     if (skip) {
-      //this is  weird
       setParameterValue(valueModifier(pan ? dialValue * 2 : dialValue, !_step));
     } else {
+      // update dialValue
       setDialValue((prev) => {
         // compare previous mouseY position
         let next = prev + (prevY - currY) * 0.001;
@@ -71,18 +83,13 @@ const Dial = ({
           cx="50"
           cy="50"
           r="40"
-          //TODO: create call back to update dial value
+          // when dial is clicked down send the updateDial function to the cursorCTX so it can be trigged if the cursor is dragged outside the dial
           onMouseDownCapture={() => {
-            setCursor((prev) => {
-              // console.log("setCursor fired");
-              const newState = {
-                ...prev,
-                mouseDown: true,
-                callback: updateDial,
-              };
-              // console.log("newState: ", newState);
-              return newState;
-            });
+            setCursor((prev) => ({
+              ...prev,
+              mouseDown: true,
+              callback: updateDial,
+            }));
           }}
         />
         <circle
