@@ -33,7 +33,7 @@ const Dial = ({
   // This value is also displayed under the dial.
   const [parameterValue, setParameterValue] = useState(initValue || 0);
 
-  // When the dial turns some valueModifier's may update the parameterValue in steps, useEffect I used to run the parameterCallback only if the dial has turned enough to update the parameterValue.
+  // When the dial turns some valueModifier functions may update the parameterValue in steps, useEffect is used to run the parameterCallback only if the dial has turned enough to update the parameterValue.
   useEffect(() => {
     // Runs only when a parameterCallback is passed
     if (parameterCallback) {
