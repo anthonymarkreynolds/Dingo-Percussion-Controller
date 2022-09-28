@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import CursorCTX from "../../util/CursorCTX";
 
 const Dial = ({
+  test,
   parameterCallback,
 
   // default to identity function
@@ -33,6 +34,11 @@ const Dial = ({
   // This value is also displayed under the dial.
   const [parameterValue, setParameterValue] = useState(initValue || 0);
 
+  useEffect(() => {
+    setDialValue(initValue);
+    setParameterValue(initValue);
+  }, [initValue]);
+
   // When the dial turns some valueModifier functions may update the parameterValue in steps, useEffect is used to run the parameterCallback only if the dial has turned enough to update the parameterValue.
   useEffect(() => {
     // Runs only when a parameterCallback is passed
@@ -43,19 +49,19 @@ const Dial = ({
   }, [parameterValue]);
 
   //min max is used to prevent the dial from overturning
-  const [min, max] = pan ? [-0.5, 0.5] : [0, 1];
+  const [min, max] = pan ? [-1, 1] : [0, 1];
 
   const updateDial = (prevY, currY, skip) => {
     console.log("updateDial has run");
 
     // if update dial was trigged without turning the dial
     if (skip) {
-      setParameterValue(valueModifier(pan ? dialValue * 2 : dialValue, !_step));
+      setParameterValue(valueModifier(dialValue, !_step));
     } else {
       // update dialValue
       setDialValue((prev) => {
         // compare previous mouseY position
-        let next = prev + (prevY - currY) * 0.001;
+        let next = prev + (prevY - currY) * (pan ? 0.002 : 0.001);
         //clamp max
         if (next > max) {
           next = max;
@@ -65,7 +71,7 @@ const Dial = ({
           next = min;
         }
         //set the param value
-        setParameterValue(valueModifier(pan ? next * 2 : next, _step));
+        setParameterValue(valueModifier(next, _step));
         return next;
       });
     }
@@ -95,7 +101,7 @@ const Dial = ({
         <circle
           pathLength={1}
           strokeDasharray={1}
-          strokeDashoffset={1 - dialValue}
+          strokeDashoffset={1 - (pan ? dialValue / 2 : dialValue)}
           className="dial-ring blur"
           cx="50"
           cy="50"
@@ -104,7 +110,7 @@ const Dial = ({
         <circle
           pathLength={1}
           strokeDasharray={1}
-          strokeDashoffset={1 - dialValue}
+          strokeDashoffset={1 - (pan ? dialValue / 2 : dialValue)}
           className={`dial-ring`}
           cx="50"
           cy="50"

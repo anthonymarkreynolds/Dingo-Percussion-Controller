@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import NightMode from "./util/NightMode";
 import MainLayout from "./layouts/MainLayout";
 import KeyPress from "./util/KeyPress";
 import SelectCTX from "./util/SelectCTX";
 import CursorCTX from "./util/CursorCTX";
 import Cursor from "./util/Cursor";
+import AudioCTX from "./audio/AudioCTX.js";
 
 function App() {
+  const { pads } = useContext(AudioCTX);
   const toggle = useState(false);
-  const select = useState(null);
+  const select = useState(pads["kick drum"]);
   const cursorState = useState({ x: 0, y: 0, mouseDown: false });
   return (
     <SelectCTX.Provider value={select}>

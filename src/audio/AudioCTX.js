@@ -31,9 +31,16 @@ let main = {
 const semitoneToPitch = (n) => 440 * (2 ** (1 / 12)) ** n;
 
 class Pad {
-  constructor(name, waveForm = "sine", baseFreq = main.pitch, pan = 0) {
+  constructor(
+    name,
+    waveForm = "sine",
+    baseFreq = main.pitch,
+    baseVol = 0.25,
+    pan = 0
+  ) {
     this.name = name;
-    this.baseVol = 0.25;
+    this.baseVol = baseVol;
+    this.baseFreq = baseFreq;
     this.osc = new OscillatorNode(actx, {
       type: waveForm,
       frequency: baseFreq,
@@ -69,15 +76,15 @@ class Pad {
 }
 
 const pads = {
-  "hi tom": new Pad("Hi Tom", "sine", semitoneToPitch(8)),
-  "crash cym": new Pad("Crash Cym", "sine", semitoneToPitch(7)),
-  "ride cym": new Pad("Ride Cym", "sine", semitoneToPitch(6)),
-  "lo tom": new Pad("Lo Tom", "sine", semitoneToPitch(5)),
-  "open hihat": new Pad("Open HiHat", "sine", semitoneToPitch(4)),
-  "closed hihat": new Pad("Closed HiHat", "sine", semitoneToPitch(3)),
-  "kick drum": new Pad("Kick Drum", "sine", semitoneToPitch(2)),
-  "snare drum": new Pad("Snare Drum", "sine", semitoneToPitch(1)),
-  clap: new Pad("Clap", "sine", semitoneToPitch(0)),
+  "hi tom": new Pad("Hi Tom", "sine", semitoneToPitch(8), 0),
+  "crash cym": new Pad("Crash Cym", "sine", semitoneToPitch(7), 0.1),
+  "ride cym": new Pad("Ride Cym", "sine", semitoneToPitch(6), 0.2),
+  "lo tom": new Pad("Lo Tom", "sine", semitoneToPitch(5), 0.3),
+  "open hihat": new Pad("Open HiHat", "sine", semitoneToPitch(4), 0.4),
+  "closed hihat": new Pad("Closed HiHat", "sine", semitoneToPitch(3), 0.5),
+  "kick drum": new Pad("Kick Drum", "sine", semitoneToPitch(2), 0.6),
+  "snare drum": new Pad("Snare Drum", "sine", semitoneToPitch(1), 0.7),
+  clap: new Pad("Clap", "sine", semitoneToPitch(0), 0.8),
   // {
 
   // osc: new OscillatorNode(actx, {
