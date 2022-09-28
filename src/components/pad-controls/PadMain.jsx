@@ -6,7 +6,7 @@ const PadMain = () => {
   const [selected] = useContext(SelectCTX);
   const [current, setCurrent] = useState({ vol: selected?.baseVol });
   useEffect(() => {
-    setCurrent({ vol: selected?.baseVol });
+    setCurrent({ vol: selected?.baseVol, pan: selected?.pan.pan.value });
   }, [selected?.name]);
   return (
     <div className="pad-main">
@@ -21,7 +21,7 @@ const PadMain = () => {
         <Dial
           sm
           pan
-          initValue={selected?.pan.pan.value}
+          initValue={current?.pan}
           label="Pan"
           parameterCallback={selected?.setPan}
         />

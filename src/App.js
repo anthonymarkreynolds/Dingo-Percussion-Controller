@@ -10,7 +10,7 @@ import AudioCTX from "./audio/AudioCTX.js";
 function App() {
   const { pads } = useContext(AudioCTX);
   const toggle = useState(false);
-  const select = useState(pads["kick drum"]);
+  const select = useState(pads["clap"]);
   const cursorState = useState({ x: 0, y: 0, mouseDown: false });
   return (
     <SelectCTX.Provider value={select}>

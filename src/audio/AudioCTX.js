@@ -28,7 +28,7 @@ let main = {
   pitch: 440,
 };
 
-const semitoneToPitch = (n) => 440 * (2 ** (1 / 12)) ** n;
+const semitoneToPitch = (n, pitch = 440) => pitch * (2 ** (1 / 12)) ** n;
 
 class Pad {
   constructor(
@@ -69,14 +69,16 @@ class Pad {
     return this.pan.pan.value;
   }
   setPitch = (value) => {
-    console.log(value);
-    console.log(semitoneToPitch(value));
-    this.osc.frequency.setValueAtTime(semitoneToPitch(value), actx.currentTime);
+    console.log(semitoneToPitch(value, this.baseFreq));
+    this.osc.frequency.setValueAtTime(
+      semitoneToPitch(value, this.baseFreq),
+      actx.currentTime
+    );
   };
 }
 
 const pads = {
-  "hi tom": new Pad("Hi Tom", "sine", semitoneToPitch(8), 0),
+  "hi tom": new Pad("Hi Tom", "sine", semitoneToPitch(8), 0.1),
   "crash cym": new Pad("Crash Cym", "sine", semitoneToPitch(7), 0.1),
   "ride cym": new Pad("Ride Cym", "sine", semitoneToPitch(6), 0.2),
   "lo tom": new Pad("Lo Tom", "sine", semitoneToPitch(5), 0.3),
@@ -85,26 +87,7 @@ const pads = {
   "kick drum": new Pad("Kick Drum", "sine", semitoneToPitch(2), 0.6),
   "snare drum": new Pad("Snare Drum", "sine", semitoneToPitch(1), 0.7),
   clap: new Pad("Clap", "sine", semitoneToPitch(0), 0.8),
-  // {
-
-  // osc: new OscillatorNode(actx, {
-  //   type: "square",
-  //   frequency: 40,
-  // }),
-  // vol: new GainNode(actx, { gain: 0 }),
-  // trigger: function () {
-  //   this.vol.gain
-  //     .cancelScheduledValues(actx.currentTime)
-  //     .setValueAtTime(0.3, actx.currentTime)
-  //     .linearRampToValueAtTime(0, actx.currentTime + 0.3);
-  // },
-  // },
 };
-
-// connect nodes to out
-// for (const pad in pads) {
-//   pads[pad].osc.connect(pads[pad].vol).connect(out);
-// }
 
 // start VCOs
 const play = () => {
@@ -117,13 +100,6 @@ const stop = () => {
     pads[pad].osc.stop();
   }
 };
-
-// const comp1 = actx.createDynamicsCompressor();
-// comp1.attack.value = 0.01;
-// comp1.release.value = 0.25;
-// comp1.ratio.value = 10;
-// comp1.threshold.value = -40;
-// comp1.knee.value = 40;
 
 const initialValue = {
   actx,
