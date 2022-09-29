@@ -20,7 +20,9 @@ const Pads = () => {
             console.log(pads[name].pan.pan.value);
           }}
         >
-          <h3 className="noselect">{name}</h3>
+          <h3 className="noselect">
+            {name}
+            </h3>
         </div>
       ))}
     </div>
