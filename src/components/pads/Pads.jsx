@@ -5,7 +5,6 @@ import SelectCTX from "../../util/SelectCTX";
 
 const Pads = () => {
   const [nightMode] = useContext(NightMode);
-  const [, setSelected] = useContext(SelectCTX);
   const { pads } = useContext(AudioCTX);
   return (
     <div className={`pads ${nightMode && "night"}`}>
@@ -14,15 +13,11 @@ const Pads = () => {
           className="pad"
           key={i}
           onClick={() => {
+            console.log(pad);
             pad.trigger();
-            setSelected(pads[name]);
-            console.log(pads[name].name);
-            console.log(pads[name].pan.pan.value);
           }}
         >
-          <h3 className="noselect">
-            {name}
-            </h3>
+          <h3 className="noselect">{name}</h3>
         </div>
       ))}
     </div>

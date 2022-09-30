@@ -9,7 +9,6 @@ const PadControls = () => {
     <div className={`pad-controls ${nightMode && "night"}`}>
       <h3 className="area-label">Pad Controls</h3>
       <PadMain />
-      <ADSR />
     </div>
   );
 };

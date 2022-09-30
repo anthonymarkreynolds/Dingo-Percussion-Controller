@@ -2,13 +2,15 @@ import { useState, useContext, useEffect } from "react";
 import CursorCTX from "../../util/CursorCTX";
 
 const Dial = ({
-  test,
   parameterCallback,
+  parameter = 0,
+  offset,
 
+  step,
+  toggleStep,
+  stepUnit,
   // default to identity function
-  valueModifier = (x) => x,
   label,
-  initValue = 0,
 
   // Panoramic dial
   pan,
@@ -17,64 +19,38 @@ const Dial = ({
   sm,
   md,
   lg,
-
-  // value stepping / snapping
-  step,
 }) => {
-  const [cursor, setCursor] = useContext(CursorCTX);
+  const [, setCursor] = useContext(CursorCTX);
 
-  // toggle snapping behaviour
-  const [_step, setStep] = useState(!!step);
-
-  // Internal value used to dial position
-  // This value is used to calculate the dashstroke-offset of the dial ring
-  const [dialValue, setDialValue] = useState(initValue || 0);
-
-  // This value is calculated using the parameterCallback which accepts the dialValue as an argument and updates the associated audio node paramaeter.
-  // This value is also displayed under the dial.
-  const [parameterValue, setParameterValue] = useState(initValue || 0);
+  const [dialValue, setDialValue] = useState(parameter || 0);
 
   useEffect(() => {
-    setDialValue(initValue);
-    setParameterValue(initValue);
-  }, [initValue]);
-
-  // When the dial turns some valueModifier functions may update the parameterValue in steps, useEffect is used to run the parameterCallback only if the dial has turned enough to update the parameterValue.
-  useEffect(() => {
-    // Runs only when a parameterCallback is passed
-    if (parameterCallback) {
-      parameterCallback(parameterValue);
-    }
-    // when parameterValue changes, run parameterCallback to update associated audio node value.
-  }, [parameterValue]);
+    setDialValue(parameter);
+  }, [parameter]);
 
   //min max is used to prevent the dial from overturning
   const [min, max] = pan ? [-1, 1] : [0, 1];
 
-  const updateDial = (prevY, currY, skip) => {
-    console.log("updateDial has run");
+  const updateDial = (prevY, currY) => {
+    console.log("updateDial has run", dialValue);
 
     // if update dial was trigged without turning the dial
-    if (skip) {
-      setParameterValue(valueModifier(dialValue, !_step));
-    } else {
-      // update dialValue
-      setDialValue((prev) => {
-        // compare previous mouseY position
-        let next = prev + (prevY - currY) * (pan ? 0.002 : 0.001);
-        //clamp max
-        if (next > max) {
-          next = max;
-        }
-        // clamp min
-        if (next < min) {
-          next = min;
-        }
-        //set the param value
-        setParameterValue(valueModifier(next, _step));
-        return next;
-      });
-    }
+    // update dialValue
+    setDialValue((prev) => {
+      // compare previous mouseY position
+      let next = prev + (prevY - currY) * (pan ? 0.002 : 0.001);
+      //clamp max
+      if (next > max) {
+        next = max;
+      }
+      // clamp min
+      if (next < min) {
+        next = min;
+      }
+      //set the param value
+      parameterCallback(next);
+      return next;
+    });
   };
   return (
     <div className="dial-container">
@@ -91,6 +67,7 @@ const Dial = ({
           r="40"
           // when dial is clicked down send the updateDial function to the cursorCTX so it can be trigged if the cursor is dragged outside the dial
           onMouseDownCapture={() => {
+            console.log(updateDial);
             setCursor((prev) => ({
               ...prev,
               mouseDown: true,
@@ -117,16 +94,17 @@ const Dial = ({
           r="40"
         />
       </svg>
-      <span className="dial-value noselect">{parameterValue.toFixed(2)}</span>
+      <span className="dial-value noselect">{offset?.toFixed(2)}</span>
       {label && <h6 className="dial-label noselect">{label}</h6>}
-      {step && (
+
+      {stepUnit && (
         <button
           onClick={() => {
-            updateDial(0, 0, true);
-            setStep(!_step);
+            toggleStep();
+            console.log("test from step button");
           }}
         >
-          {_step ? step : "free"}
+          {step ? stepUnit : "free"}
         </button>
       )}
     </div>

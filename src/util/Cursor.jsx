@@ -14,7 +14,7 @@ const Cursor = () => {
     });
     document.addEventListener("mousemove", (e) => {
       setCursor((prev) => {
-        if (prev.callback) {
+        if (prev.callback && prev.mouseDown) {
           prev.callback(prev.y, e.screenY);
         }
         return { ...prev, x: e.screenX, y: e.screenY };
