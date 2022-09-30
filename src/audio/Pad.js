@@ -13,8 +13,9 @@ class Pad {
     this.actx = actx;
     this.name = name;
     this.parameters = {
-      pitch: new Parameter(initFreq, multiplier(12), semitoneToPitch, 0),
-      volume: new Parameter(initVol),
+      pitch: new Parameter(initFreq, 0, multiplier(12), semitoneToPitch, true),
+      volume: new Parameter(0, initVol),
+      pan: new Parameter(0, pan),
     };
     this.osc = new OscillatorNode(actx, {
       type: waveForm,
@@ -23,18 +24,22 @@ class Pad {
     this.vol = new GainNode(actx, {
       gain: 0,
     });
-    this.pan = new StereoPannerNode(actx, { pan: pan });
+    this.pan = new StereoPannerNode(actx, {
+      pan: this.parameters.pan.currentValueAtOffset,
+    });
     this.osc.connect(this.vol).connect(this.pan).connect(actx.destination);
   }
   trigger = () => {
+    this.pan.pan.setValueAtTime(
+      this.parameters.pan.currentValueAtOffset,
+      this.actx.currentTime
+    );
     this.osc.frequency
       .cancelScheduledValues(this.actx.currentTime)
       .setValueAtTime(
         this.parameters.pitch.currentValueAtOffset,
         this.actx.currentTime
       );
-    console.log(this.parameters.test);
-    console.log(this.actx.currentTime);
     this.vol.gain
       .cancelScheduledValues(this.actx.currentTime)
       .setValueAtTime(

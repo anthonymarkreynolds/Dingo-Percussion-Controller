@@ -1,19 +1,19 @@
 class Parameter {
   constructor(
     baseValue,
-    offsetFn = (x) => x,
-    valueFn = (x) => () => x,
     paramInit = 0,
+    offsetFn = (x) => x,
+    valueFn = () => (x) => x,
     step = false
   ) {
-    this.baseValue = baseValue;
-    this.currentValueAtOffset = baseValue;
-    this.decimal = paramInit;
-    this.offset = 0;
     this.offsetFn = offsetFn;
     this.valueFn = valueFn;
     this.step = step;
-    this.setParam(paramInit);
+
+    this.baseValue = baseValue;
+    this.decimal = paramInit;
+    this.offset = offsetFn(this.decimal, step);
+    this.currentValueAtOffset = this.valueFn(this.baseValue)(this.offset);
   }
   setParam = (newParamValue = this.decimal) => {
     this.decimal = newParamValue;

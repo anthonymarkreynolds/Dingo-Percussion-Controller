@@ -13,15 +13,8 @@ const PadMain = () => {
       <div className="dial-group">
         {selected && (
           <>
-            <div>
-              <span>{`${selected.name} pitch`}</span>
-              <br />
-              <span>{`Freq: ${selected.parameters.pitch.currentValueAtOffset}`}</span>
-              <br />
-              <span>{`Offset: ${selected.parameters.pitch.offset}`}</span>
-              <br />
-              <span>{`decimal: ${selected.parameters.pitch.decimal}`}</span>
-            </div>
+            <Dial sm pan label="Pan" parameter={selected.parameters.pan} />
+            <Dial sm label="Vol" parameter={selected.parameters.volume} />
             <Dial
               sm
               pan

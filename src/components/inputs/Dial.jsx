@@ -3,13 +3,10 @@ import CursorCTX from "../../util/CursorCTX";
 
 const Dial = ({
   parameter,
-
   stepUnit,
   label,
-
   // Panoramic dial
   pan,
-
   // dial sizes
   sm,
   md,
