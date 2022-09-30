@@ -5,7 +5,6 @@ const Dial = ({
   parameter,
 
   stepUnit,
-  // default to identity function
   label,
 
   // Panoramic dial
@@ -31,9 +30,6 @@ const Dial = ({
   const [min, max] = pan ? [-1, 1] : [0, 1];
 
   const updateDial = (prevY, currY) => {
-    console.log("updateDial has run", dialValue);
-
-    // if update dial was trigged without turning the dial
     // update dialValue
     setDialValue((prev) => {
       // compare previous mouseY position
