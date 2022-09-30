@@ -6,7 +6,7 @@ import ThemeStyleSwitch from "../inputs/ThemeStyleSwitch";
 
 const MainControls = () => {
   const { play } = useContext(AudioCTX);
-  const [nightMode] = useContext(NightMode);
+  const { nightMode } = useContext(NightMode);
   return (
     <div className={`main-controls ${nightMode && "night"}`}>
       <h3 className="area-label">Main Controls</h3>

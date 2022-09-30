@@ -6,7 +6,7 @@ import { useContext } from "react";
 import NightMode from "../util/NightMode";
 
 const DrumMachine = () => {
-  const [nightMode] = useContext(NightMode);
+  const { nightMode } = useContext(NightMode);
   return (
     <div className="underlay">
       <div className={`drum-machine ${nightMode && "night"}`}>

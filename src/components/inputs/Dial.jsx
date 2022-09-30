@@ -2,12 +2,8 @@ import { useState, useContext, useEffect } from "react";
 import CursorCTX from "../../util/CursorCTX";
 
 const Dial = ({
-  parameterCallback,
-  parameter = 0,
-  offset,
+  parameter,
 
-  step,
-  toggleStep,
   stepUnit,
   // default to identity function
   label,
@@ -20,13 +16,16 @@ const Dial = ({
   md,
   lg,
 }) => {
-  const [, setCursor] = useContext(CursorCTX);
+  const { offset, step, decimal, toggleStep, setParam } = parameter;
 
-  const [dialValue, setDialValue] = useState(parameter || 0);
+  const { setCursor } = useContext(CursorCTX);
+
+  const [dialValue, setDialValue] = useState(decimal || 0);
 
   useEffect(() => {
-    setDialValue(parameter);
-  }, [parameter]);
+    setDialValue(decimal);
+    console.log("decimal changed in dial", decimal);
+  }, [decimal]);
 
   //min max is used to prevent the dial from overturning
   const [min, max] = pan ? [-1, 1] : [0, 1];
@@ -48,7 +47,7 @@ const Dial = ({
         next = min;
       }
       //set the param value
-      parameterCallback(next);
+      setParam(next);
       return next;
     });
   };
@@ -67,7 +66,6 @@ const Dial = ({
           r="40"
           // when dial is clicked down send the updateDial function to the cursorCTX so it can be trigged if the cursor is dragged outside the dial
           onMouseDownCapture={() => {
-            console.log(updateDial);
             setCursor((prev) => ({
               ...prev,
               mouseDown: true,

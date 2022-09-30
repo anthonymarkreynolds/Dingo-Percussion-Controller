@@ -4,7 +4,7 @@ import PadMain from "./PadMain";
 import ADSR from "./ADSR";
 
 const PadControls = () => {
-  const [nightMode] = useContext(NightMode);
+  const { nightMode } = useContext(NightMode);
   return (
     <div className={`pad-controls ${nightMode && "night"}`}>
       <h3 className="area-label">Pad Controls</h3>

@@ -11,12 +11,11 @@ class Pad {
     pan = 0
   ) {
     this.actx = actx;
+    this.name = name;
     this.parameters = {
-      test: "test",
       pitch: new Parameter(initFreq, multiplier(12), semitoneToPitch, 0),
       volume: new Parameter(initVol),
     };
-    this.name = name;
     this.osc = new OscillatorNode(actx, {
       type: waveForm,
       frequency: this.baseFreq,

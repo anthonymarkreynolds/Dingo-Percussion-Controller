@@ -4,7 +4,8 @@ import NightMode from "../../util/NightMode";
 import SelectCTX from "../../util/SelectCTX";
 
 const Pads = () => {
-  const [nightMode] = useContext(NightMode);
+  const { nightMode } = useContext(NightMode);
+  const { setSelected } = useContext(SelectCTX);
   const { pads } = useContext(AudioCTX);
   return (
     <div className={`pads ${nightMode && "night"}`}>
@@ -13,8 +14,9 @@ const Pads = () => {
           className="pad"
           key={i}
           onClick={() => {
-            console.log(pad);
             pad.trigger();
+            setSelected(pads[name]);
+            console.log("selected: ", pads[name]);
           }}
         >
           <h3 className="noselect">{name}</h3>

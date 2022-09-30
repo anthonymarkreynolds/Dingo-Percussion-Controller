@@ -1,26 +1,36 @@
-import { useContext, useState, useEffect } from "react";
-import ParameterCTX from "../../audio/ParameterCTX";
+import { useContext, useEffect } from "react";
+import SelectCTX from "../../util/SelectCTX";
+import AudioCTX from "../../audio/AudioCTX";
 import Dial from "../inputs/Dial";
 
 const PadMain = () => {
-  const { parameters, setParameters } = useContext(ParameterCTX);
-  const selected = parameters["hi tom"];
+  const { selected } = useContext(SelectCTX);
+  const { setParam } = useContext(AudioCTX);
   console.log(selected);
   return (
     <div className="pad-main">
       <h2 style={{ alignSelf: "center" }}>{selected?.name || "<Pad name>"} </h2>
       <div className="dial-group">
-        <Dial
-          sm
-          pan
-          label="Pitch"
-          stepUnit="semi"
-          step={selected?.pitch.step}
-          toggleStep={selected?.pitch.toggleStep}
-          parameterCallback={selected?.pitch.setParam}
-          offset={selected?.pitch.offset}
-          parameter={selected?.pitch}
-        />
+        {selected && (
+          <>
+            <div>
+              <span>{`${selected.name} pitch`}</span>
+              <br />
+              <span>{`Freq: ${selected.parameters.pitch.currentValueAtOffset}`}</span>
+              <br />
+              <span>{`Offset: ${selected.parameters.pitch.offset}`}</span>
+              <br />
+              <span>{`decimal: ${selected.parameters.pitch.decimal}`}</span>
+            </div>
+            <Dial
+              sm
+              pan
+              label="Pitch"
+              stepUnit="semi"
+              parameter={selected.parameters.pitch}
+            />
+          </>
+        )}
       </div>
     </div>
   );

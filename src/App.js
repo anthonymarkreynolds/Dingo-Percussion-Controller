@@ -1,23 +1,22 @@
-import { useState } from "react";
-import NightMode from "./util/NightMode";
 import MainLayout from "./layouts/MainLayout";
 // import KeyPress from "./util/KeyPress";
-import CursorCTX from "./util/CursorCTX";
-import Cursor from "./util/Cursor";
-import { ParameterProvider } from "./audio/ParameterCTX";
+
+import { SelectProvider } from "./util/SelectCTX";
+import { CursorProvider } from "./util/CursorCTX";
+import { NightModeProvider } from "./util/NightMode";
+import { AudioCTXProvider } from "./audio/AudioCTX";
 
 function App() {
-  const toggle = useState(false);
-  const cursorState = useState({ x: 0, y: 0, mouseDown: false });
   return (
-    <ParameterProvider>
-      <CursorCTX.Provider value={cursorState}>
-        <NightMode.Provider value={toggle}>
-          <Cursor />
-          <MainLayout />
-        </NightMode.Provider>
-      </CursorCTX.Provider>
-    </ParameterProvider>
+    <CursorProvider>
+      <SelectProvider>
+        <AudioCTXProvider>
+          <NightModeProvider>
+            <MainLayout />
+          </NightModeProvider>
+        </AudioCTXProvider>
+      </SelectProvider>
+    </CursorProvider>
   );
 }
 

@@ -8,15 +8,15 @@ class Parameter {
   ) {
     this.baseValue = baseValue;
     this.currentValueAtOffset = baseValue;
-    this.parameter = paramInit;
+    this.decimal = paramInit;
     this.offset = 0;
     this.offsetFn = offsetFn;
     this.valueFn = valueFn;
     this.step = step;
     this.setParam(paramInit);
   }
-  setParam = (newParamValue = this.parameter) => {
-    this.parameter = newParamValue;
+  setParam = (newParamValue = this.decimal) => {
+    this.decimal = newParamValue;
     this.offset = this.offsetFn(newParamValue, this.step);
     this.currentValueAtOffset = this.valueFn(this.baseValue)(this.offset);
   };
