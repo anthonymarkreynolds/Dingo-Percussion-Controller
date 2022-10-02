@@ -45,7 +45,6 @@
       height: 30px;
       background-color: map-get($colors, spotTwo);
       box-shadow: 0 2px 2px map-get($colors, secondary);
-
       border-radius: 2px;
       transition: all 0.2s ease;
       &:hover {
@@ -58,7 +57,12 @@
       background-color: rgba(map-get($colors, spotTwo), 0.75);
     }
     .selected {
-      background-color: map-get($colors, tertiary);
+      background-color: mix(
+        map-get($colors, spotThree),
+        map-get($colors, tertiary)
+      );
+      border: 1px solid map-get($colors, highlight);
+      border-radius: 3px;
     }
   }
 }
