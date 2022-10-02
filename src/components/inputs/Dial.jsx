@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import CursorCTX from "../../util/CursorCTX";
 
 const Dial = ({
-  parameter,
+  parameter = {},
   stepUnit,
   label,
   // Panoramic dial

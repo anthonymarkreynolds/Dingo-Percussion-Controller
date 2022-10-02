@@ -23,8 +23,14 @@
 }
 
 .main-controls {
+  background-image: url("../../../public/dingo.jpeg");
+  background-size: cover;
+  background-position: 50% 20%;
   grid-column: 1 / 3;
-  height: 200px;
+  .area {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .sequencer {
