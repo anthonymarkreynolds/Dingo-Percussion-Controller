@@ -12,8 +12,8 @@ export default function ThemeStyleSwitch() {
           value={nightMode}
           onChange={() => setNightMode(!nightMode)}
         />
-        <span className="switch-left">Nig</span>
-        <span className="switch-right">Day</span>
+        <span className="switch-left">☾</span>
+        <span className="switch-right">☼</span>
       </label>
     </div>
   );

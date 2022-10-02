@@ -4,7 +4,7 @@ import SelectCTX from "./SelectCTX";
 
 const KeyPress = () => {
   let { pads } = useContext(AudioCTX);
-  let [, setSelected] = useContext(SelectCTX);
+  let { setSelected } = useContext(SelectCTX);
   pads = Object.values(pads);
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown, true);

@@ -2,7 +2,7 @@
   overflow: hidden;
   background-image: url("../../../public/plastic-tile.jpg");
   border-radius: 10px;
-  border: 1px solid cornsilk;
+  border: 1px solid map-get($colors, spotTwo);
   box-shadow: 0 2px 2px map-get($colors, gray);
 }
 
@@ -10,13 +10,13 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 8px;
-  background-color: rgba(lighten(map-get($colors, white), 5%), 0.75);
+  background-color: rgba(lighten(map-get($colors, spotThree), 5%), 0.75);
   padding: 10px;
   border-radius: inherit;
   & > div {
     overflow: hidden;
     border-radius: 8px;
-    border: 2px solid rgba(lighten(map-get($colors, highlight), 35%), 0.25);
+    border: 2px solid rgba(lighten(map-get($colors, spotOne), 35%), 0.25);
     background-color: white;
     box-shadow: inset 0 2px 2px map-get($colors, gray);
   }

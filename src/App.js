@@ -1,5 +1,5 @@
 import MainLayout from "./layouts/MainLayout";
-// import KeyPress from "./util/KeyPress";
+import KeyPress from "./util/KeyPress";
 
 import { SelectProvider } from "./util/SelectCTX";
 import { CursorProvider } from "./util/CursorCTX";
@@ -12,6 +12,7 @@ function App() {
       <SelectProvider>
         <AudioCTXProvider>
           <NightModeProvider>
+            <KeyPress />
             <MainLayout />
           </NightModeProvider>
         </AudioCTXProvider>

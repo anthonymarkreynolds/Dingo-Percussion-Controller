@@ -10,3 +10,17 @@
 
 @import "layouts/main-layout";
 @import "layouts/drum-machine";
+
+html {
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+  font-size: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}

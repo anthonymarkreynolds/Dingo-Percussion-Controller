@@ -19,6 +19,7 @@ const Pads = () => {
             console.log("selected: ", pads[name]);
           }}
         >
+          <h4>{pad["num"]} </h4>
           <h3 className="noselect">{name}</h3>
         </div>
       ))}
