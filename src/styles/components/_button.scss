@@ -1,0 +1,22 @@
+button {
+  border: none;
+  background-color: map-get($colors, primary);
+  padding: 4px;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px map-get($colors, dark);
+  &.selected {
+    background-color: map-get($colors, highlight);
+    outline: 1px solid map-get($colors, white);
+  }
+  &:hover {
+    background-color: map-get($colors, light);
+  }
+}
+.env-buttons {
+  border-radius: 8px;
+  display: flex;
+
+  button {
+    margin: 0 2px;
+  }
+}
