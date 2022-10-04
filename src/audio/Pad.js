@@ -3,36 +3,25 @@ import Envelope from "./Envelope";
 import { multiplier, semitoneToPitch } from "./AudioFunctions";
 
 class Pad {
-  constructor(
-    num,
+  constructor({
+    padNumber,
     actx,
     name,
-    waveForm = "sine",
-    initFreq = 440,
-    initVol = 0.25,
-    pan = 0,
-    duration = 0.25,
-    res = 0
-  ) {
-    this.num = num;
+    oscWaveform,
+    filterType,
+    parameters,
+    envelopes,
+  }) {
+    this.num = padNumber;
     this.actx = actx;
     this.name = name;
-    this.parameters = {
-      pitch: new Parameter(initFreq, 0, multiplier(36), semitoneToPitch, true),
-      volume: new Parameter(0, 0),
-      pan: new Parameter(0, pan),
-      cutoff: new Parameter(880, 0, multiplier(48), semitoneToPitch),
-      res: new Parameter(0, 0.001, multiplier(15)),
-    };
-    this.envelopes = {
-      volume: new Envelope(0, 0.5, 0.5, 0.5),
-      pan: new Envelope(),
-      pitch: new Envelope(0, 0.5, 0.5, 0),
-      cutoff: new Envelope(0, 0.5, 0.5, 0),
-    };
+    this.parameters = parameters;
+    this.envelopes = envelopes;
+    this.filterType = filterType;
+
     this.osc = new OscillatorNode(actx, {
-      type: waveForm,
-      frequency: this.baseFreq,
+      type: oscWaveform,
+      frequency: 440,
     });
     this.vol = new GainNode(actx, {
       gain: 0,
@@ -41,10 +30,10 @@ class Pad {
       frequency: this.parameters.cutoff.currentValueAtOffset,
       Q: this.parameters.res.currentValueAtOffset,
       gain: 25,
-      type: "lowpass",
+      type: filterType,
     });
     this.pan = new StereoPannerNode(actx, {
-      pan: this.parameters.pan.currentValueAtOffset,
+      pan: this.parameters.pan?.currentValueAtOffset || 0,
     });
     this.osc
       .connect(this.vol)
@@ -106,16 +95,6 @@ class Pad {
       this.vol.gain,
       now
     );
-    // const { attack, decay, sustain, release, amount } = this.envelopes.volume;
-    // const attackTime = attack.currentValueAtOffset;
-    // const decayTime = attackTime + decay.currentValueAtOffset;
-    // const peakHeight =
-    //   this.parameters.volume.currentValueAtOffset * amount.currentValueAtOffset;
-    // this.vol.gain
-    //   .cancelScheduledValues(now)
-    //   .setValueAtTime(0, now)
-    //   .linearRampToValueAtTime(peakHeight, now + attackTime)
-    //   .linearRampToValueAtTime(0, now + decayTime);
   };
 }
 

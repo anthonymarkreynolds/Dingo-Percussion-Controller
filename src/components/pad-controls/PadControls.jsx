@@ -32,7 +32,7 @@ const PadControls = () => {
               </div>
             </div>
             <div>
-              <h2>Filter</h2>
+              <h2>Filter - {selected.filterType}</h2>
               <div className="dial-group ">
                 {selected && (
                   <>
