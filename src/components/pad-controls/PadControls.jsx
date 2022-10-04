@@ -12,7 +12,7 @@ const PadControls = () => {
   return (
     <div className={`pad-controls ${nightMode && "night"}`}>
       <h3 className="area-label">Pad Controls</h3>
-      {selected && (
+      {selected ? (
         <>
           <PadMain parameters={selected.parameters} name={selected.name} />
           <div className="params">
@@ -49,6 +49,8 @@ const PadControls = () => {
             </div>
           </div>
         </>
+      ) : (
+        <h1>Select A Drum Pad</h1>
       )}
     </div>
   );

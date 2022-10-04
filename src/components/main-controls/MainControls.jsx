@@ -13,12 +13,12 @@ const MainControls = () => {
       <h3 className="area-label">Main Controls</h3>
       <div className="area">
         <div>
-          <ThemeStyleSwitch />
+          <h2>Enable Sound</h2>
           <ToggleSwitch callback={(playing) => !playing && play()} />
         </div>
-        <div className="dial-group column">
-          <Dial lg label="Volume" />
-          <Dial lg label="Pan" />
+        <div>
+          <h3>Theme</h3>
+          <ThemeStyleSwitch />
         </div>
       </div>
     </div>
