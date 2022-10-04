@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/dingo-percussion-controller/static/css/main.5779fb87.css",
-    "main.js": "/dingo-percussion-controller/static/js/main.213caab7.js",
-    "static/js/787.abbcef0e.chunk.js": "/dingo-percussion-controller/static/js/787.abbcef0e.chunk.js",
-    "static/media/dingo.jpeg": "/dingo-percussion-controller/static/media/dingo.bac5b39125918e294495.jpeg",
-    "static/media/plastic-tile.jpg": "/dingo-percussion-controller/static/media/plastic-tile.4b04c2e35f0b6884ba7b.jpg",
-    "index.html": "/dingo-percussion-controller/index.html",
-    "main.5779fb87.css.map": "/dingo-percussion-controller/static/css/main.5779fb87.css.map",
-    "main.213caab7.js.map": "/dingo-percussion-controller/static/js/main.213caab7.js.map",
-    "787.abbcef0e.chunk.js.map": "/dingo-percussion-controller/static/js/787.abbcef0e.chunk.js.map"
+    "main.css": "/Dingo-Percussion-Controller/static/css/main.b63e3a10.css",
+    "main.js": "/Dingo-Percussion-Controller/static/js/main.0bb8bdbe.js",
+    "static/js/787.abbcef0e.chunk.js": "/Dingo-Percussion-Controller/static/js/787.abbcef0e.chunk.js",
+    "static/media/dingo.jpeg": "/Dingo-Percussion-Controller/static/media/dingo.bac5b39125918e294495.jpeg",
+    "static/media/plastic-tile.jpg": "/Dingo-Percussion-Controller/static/media/plastic-tile.4b04c2e35f0b6884ba7b.jpg",
+    "index.html": "/Dingo-Percussion-Controller/index.html",
+    "main.b63e3a10.css.map": "/Dingo-Percussion-Controller/static/css/main.b63e3a10.css.map",
+    "main.0bb8bdbe.js.map": "/Dingo-Percussion-Controller/static/js/main.0bb8bdbe.js.map",
+    "787.abbcef0e.chunk.js.map": "/Dingo-Percussion-Controller/static/js/787.abbcef0e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5779fb87.css",
-    "static/js/main.213caab7.js"
+    "static/css/main.b63e3a10.css",
+    "static/js/main.0bb8bdbe.js"
   ]
 }
